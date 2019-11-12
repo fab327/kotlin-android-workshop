@@ -7,7 +7,14 @@ package com.workshop.universityannouncementsboard.extra
 // “FizzBuzz” if number is divisible both by 3 and 5 (by 15)
 // Print elements using `console.println`
 fun fizzBuzz(console: Console) {
-    TODO()
+    for (i in 0..100) {
+        when {
+            i % 3 == 0 -> console.println("Fizz")
+            i % 5 == 0 -> console.println("Buzz")
+            i % 15 == 0 -> console.println("FizzBuzz")
+            else -> console.println("$i")
+        }
+    }
 }
 
 class Console {
@@ -22,14 +29,28 @@ fun printlnWrap(any: Any?) {
 
 // Fibonacci number that starts from 1 and 1 (fib(0) == 1, fib(1) == 1, fib(2) == 2, fib(3) == 3, fib(4) == 5, fib(5) == 8)
 // https://en.wikipedia.org/wiki/Fibonacci_number
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    if (n == 0 || n == 1) return 1
+
+    return fib(n - 1) + fib(n - 2)
+}
 
 fun main() {
-    println("Hello, world")
+    println("FizzBuzz")
+    fizzBuzz(Console())
 
-    // TODO: I want User which can be used as follows:
-    // val user = User(0, "marcinmoskala@gmail.com")
-    // print(user.id) // 0
-    // print(user.email) // marcinmoskala@gmail.com
-    // print(user) // User with id $id and email $email
+    println("\nfib")
+    fib(5).also { println(it) }
+
+    println()
+    val user = User(0, "marcinmoskala@gmail.com")
+    println(user.id) // 0
+    println(user.email) // marcinmoskala@gmail.com
+    println(user) // User with id $id and email $email
+}
+
+class User(val id: Int, val email: String) {
+    override fun toString(): String {
+        return "User with id $id and email $email"
+    }
 }
