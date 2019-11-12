@@ -1,51 +1,78 @@
 package com.workshop.universityannouncementsboard.extra
 
-fun createTable(): TableBuilder {
-    // TODO: This is how I would prefer to print it
-//return table {
-//    tr {
-//      td { +"A" }
-//      td { +"B" }
-//    }
-//    tr {
-//      td { +"C" }
-//      td { +"D" }
-//    }
-//}
-    val td1 = TdBuilder()
-    td1.text = "A"
-    val td2 = TdBuilder()
-    td2.text = "B"
-
-    val tr1 = TrBuilder()
-    tr1.tds += td1
-    tr1.tds += td2
-
-    val td3 = TdBuilder()
-    td3.text = "C"
-    val td4 = TdBuilder()
-    td4.text = "D"
-
-    val tr2 = TrBuilder()
-    tr2.tds += td3
-    tr2.tds += td4
-
-    val html = TableBuilder()
-    html.trs += tr1
-    html.trs += tr2
-    return html
-}
-
+/** Also see [com.workshop.universityannouncementsboard.AnnouncementsConfig] */
 fun main() {
-    println(createTable()) //<table><tr><td>This is row 1</td><td>This is row 2</td></tr></table>
+    println(createTable())
+    /*
+        <table><tr><td>A</td><td>B</td></tr><tr><td>C</td><td>D</td></tr></table>
+            OR
+        <table>
+        <tr>
+        <td>A</td>
+        <td>B</td>
+        </tr>
+        <tr>
+        <td>C</td>
+        <td>D</td>
+        </tr>
+        </table>
+     */
 }
 
+fun createTable(): TableBuilder {
+    return table {
+        tr {
+            td { +"A" }
+            td { +"B" }
+            // Without htmlDsl it will be allowed
+//            tr {
+//                td { +"C" }
+//                td { +"D" }
+//            }
+        }
+        tr {
+            td { +"C" }
+            td { +"D" }
+        }
+    }
+}
+
+fun table(init: TableBuilder.() -> Unit): TableBuilder {
+    val tableBuilder = TableBuilder().apply { init() }
+//    init.invoke(tableBuilder)
+    return tableBuilder
+}
+
+@HtmlDsl
 data class TableBuilder(var trs: List<TrBuilder> = emptyList()) {
     override fun toString(): String = "<table>${trs.joinToString(separator = "")}</table>"
+
+    fun tr(init: TrBuilder.() -> Unit) {
+        val builder = TrBuilder().apply { init() }
+//        init.invoke(builder)
+        trs += builder
+    }
 }
+
+@HtmlDsl
 data class TrBuilder(var tds: List<TdBuilder> = emptyList()) {
     override fun toString(): String = "<tr>${tds.joinToString(separator = "")}</tr>"
+
+    fun td(init: TdBuilder.() -> Unit) {
+        val builder = TdBuilder().apply { init() }
+//        init.invoke(builder)
+        tds += builder
+    }
 }
+
+@HtmlDsl
 data class TdBuilder(var text: String = "") {
     override fun toString(): String = "<td>$text</td>"
+
+    operator fun String.unaryPlus() {
+        text += this
+    }
 }
+
+@DslMarker
+annotation class HtmlDsl

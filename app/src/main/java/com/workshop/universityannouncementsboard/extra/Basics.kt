@@ -7,11 +7,11 @@ package com.workshop.universityannouncementsboard.extra
 // “FizzBuzz” if number is divisible both by 3 and 5 (by 15)
 // Print elements using `console.println`
 fun fizzBuzz(console: Console) {
-    for (i in 0..100) {
+    for (i in 1..100) {
         when {
-            i % 3 == 0 -> console.println("Fizz")
-            i % 5 == 0 -> console.println("Buzz")
             i % 15 == 0 -> console.println("FizzBuzz")
+            i % 5 == 0 -> console.println("Buzz")
+            i % 3 == 0 -> console.println("Fizz")
             else -> console.println("$i")
         }
     }
@@ -35,6 +35,7 @@ fun fib(n: Int): Int {
     return fib(n - 1) + fib(n - 2)
 }
 
+/**  @see [com.workshop.universityannouncementsboard.extra.fib] */
 fun main() {
     println("FizzBuzz")
     fizzBuzz(Console())

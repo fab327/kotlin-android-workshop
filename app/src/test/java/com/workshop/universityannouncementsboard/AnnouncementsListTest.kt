@@ -1,9 +1,9 @@
 package com.workshop.universityannouncementsboard
 
 import com.workshop.universityannouncementsboard.model.Announcement
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
-
-import org.junit.Assert.*
 
 class AnnouncementsListTest {
 
