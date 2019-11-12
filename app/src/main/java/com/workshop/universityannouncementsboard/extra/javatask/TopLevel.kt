@@ -1,3 +1,5 @@
+@file:JvmName("KotlinTopLevel")
+
 package com.workshop.universityannouncementsboard.extra.javatask
 
 fun topLevelFunction() {
