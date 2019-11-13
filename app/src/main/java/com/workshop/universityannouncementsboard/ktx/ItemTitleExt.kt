@@ -1,4 +1,5 @@
 @file:Suppress("PackageDirectoryMismatch")
 package kotlinx.android.synthetic.main.item_title
 
-// TODO
+//val LayoutContainer.titleView: TextView
+//    get() = container!!.findViewById(R.id.titleView)

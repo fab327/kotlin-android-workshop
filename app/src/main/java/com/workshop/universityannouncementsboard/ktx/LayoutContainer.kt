@@ -1,4 +1,6 @@
 @file:Suppress("PackageDirectoryMismatch")
 package kotlinx.android.extensions
 
-// TODO
+//interface LayoutContainer {
+//    var container: View?
+//}

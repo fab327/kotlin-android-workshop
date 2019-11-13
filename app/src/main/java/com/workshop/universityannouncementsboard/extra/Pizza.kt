@@ -7,8 +7,17 @@ class Pizza(
     val mushrooms: Int = 0,
     val ham: Int = 0,
     val cheese: Int = 0
-)
+) {
+    companion object {
+        fun hawaiian() = Pizza(pineapple = 1, ham = 1, cheese = 1)
+    }
+}
+
+object PizzaFactory {
+    fun hawaiian() = Pizza(pineapple = 1, ham = 1, cheese = 1)
+}
 
 fun main() {
-    val hawaiian = Pizza(pineapple = 1, ham = 1, cheese = 1)
+    val hawaiian = Pizza.hawaiian()
+    val hawaiian2 = PizzaFactory.hawaiian()
 }
